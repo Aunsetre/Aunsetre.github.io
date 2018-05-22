@@ -1833,7 +1833,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #39ff22;
+  background: #ff0474;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2595,7 +2595,7 @@ embed {
   display: inline-block;
 }
 body {
-  background: url("https://source.unsplash.com/random/1980x900");
+  background: url("https://source.unsplash.com/random/1980x1080");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
