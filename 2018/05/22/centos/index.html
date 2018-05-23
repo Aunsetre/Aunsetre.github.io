@@ -90,7 +90,7 @@
     root: '/',
     scheme: 'Muse',
     version: '6.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     fastclick: false,
     lazyload: false,
@@ -993,6 +993,8 @@ destination-unreachable echo-reply echo-request parameter-problem redirect route
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -1127,7 +1129,7 @@ destination-unreachable echo-reply echo-request parameter-problem redirect route
             owner: 'Aunsetre',
             repo: 'Aunsetre.github.io',
             
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            lang: "en" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
             oauth: {
             

@@ -90,7 +90,7 @@
     root: '/',
     scheme: 'Muse',
     version: '6.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     fastclick: false,
     lazyload: false,
@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="Aunsetre&#39;s Blog">
 <meta property="og:description" content="在安全性要求较高的web项目中，我们经常有这样的需求:  黑名单：禁止指定ip访问。 白名单：允许指定ip访问。 根据ip追踪恶意入侵系统者。  在Java中我们通常可以这样获取客户端ip地址：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-22T01:48:53.673Z">
+<meta property="og:updated_time" content="2018-05-23T10:25:18.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java获取客户端真实IP">
 <meta name="twitter:description" content="在安全性要求较高的web项目中，我们经常有这样的需求:  黑名单：禁止指定ip访问。 白名单：允许指定ip访问。 根据ip追踪恶意入侵系统者。  在Java中我们通常可以这样获取客户端ip地址：">
@@ -401,7 +401,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: May 22, 2018 09:48:53" itemprop="dateModified" datetime="2018-05-22T09:48:53+08:00">May 22, 2018</time>
+                <time title="Modified: May 23, 2018 18:25:18" itemprop="dateModified" datetime="2018-05-23T18:25:18+08:00">May 23, 2018</time>
               
             
           </span>
@@ -456,7 +456,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">906</span>
+                <span title="Symbols count in article">856</span>
               
 
               
@@ -497,10 +497,10 @@
 <li>根据ip追踪恶意入侵系统者。</li>
 </ul>
 <p>在Java中我们通常可以这样获取客户端ip地址：<a id="more"></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRemoteAddr();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRemoteAddr();</span><br></pre></td></tr></table></figure>
 <p>但是这个方法有个弊端，就是如果对方使用了反向代理，那么这个方法获取到的永远都是反向代理服务器的ip，而并非用户的真实ip。这样也能达到禁止访问的目的，但是对于已经发生的恶意入侵，我们却无法定位到真实的用户主机。</p>
 <p>当你遇到类似的问题时，那么下面的代码就能够很好的帮助你。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static String getClientIP(HttpServletRequest request) &#123;</span><br><span class="line">	String ip = request.getHeader(&quot;X-Forwarded-For&quot;);</span><br><span class="line">	if (StringUtils.isNotEmpty(ip) &amp;&amp; !&quot;unKnown&quot;.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">	    // 多次反向代理后会有多个ip值，第一个ip才是真实ip</span><br><span class="line">	    int index = ip.indexOf(&quot;,&quot;);</span><br><span class="line">	    if (index != -1) &#123;</span><br><span class="line">	        return ip.substring(0, index);</span><br><span class="line">	    &#125; else &#123;</span><br><span class="line">	        return ip;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ip = request.getHeader(&quot;X-Real-IP&quot;);</span><br><span class="line">	if (StringUtils.isNotEmpty(ip) &amp;&amp; !&quot;unKnown&quot;.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">	    return ip;</span><br><span class="line">	&#125;</span><br><span class="line">	return request.getRemoteAddr();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getClientIP</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">	String ip = request.getHeader(<span class="string">"X-Forwarded-For"</span>);</span><br><span class="line">	<span class="keyword">if</span> (StringUtils.isNotEmpty(ip) &amp;&amp; !<span class="string">"unKnown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">	    <span class="comment">// 多次反向代理后会有多个ip值，第一个ip才是真实ip</span></span><br><span class="line">	    <span class="keyword">int</span> index = ip.indexOf(<span class="string">","</span>);</span><br><span class="line">	    <span class="keyword">if</span> (index != -<span class="number">1</span>) &#123;</span><br><span class="line">	        <span class="keyword">return</span> ip.substring(<span class="number">0</span>, index);</span><br><span class="line">	    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	        <span class="keyword">return</span> ip;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ip = request.getHeader(<span class="string">"X-Real-IP"</span>);</span><br><span class="line">	<span class="keyword">if</span> (StringUtils.isNotEmpty(ip) &amp;&amp; !<span class="string">"unKnown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">	    <span class="keyword">return</span> ip;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> request.getRemoteAddr();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -843,6 +843,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -977,7 +979,7 @@
             owner: 'Aunsetre',
             repo: 'Aunsetre.github.io',
             
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            lang: "en" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
             oauth: {
             
