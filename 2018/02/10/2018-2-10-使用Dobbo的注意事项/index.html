@@ -123,6 +123,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Aunsetre's Blog" type="application/atom+xml" />
+
 
 
 
@@ -378,7 +380,7 @@
                 
               
 
-              <time title="Created: February 10, 2018 2018-02-10T00:00:00+08:00" itemprop="dateCreated datePublished" datetime="2018-02-10T00:00:00+08:00">February 10, 2018</time>
+              <time title="Created: February 10, 2018 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-10T00:00:00+08:00">February 10, 2018</time>
             
 
             
@@ -395,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: May 22, 2018 2018-05-22T11:54:37+08:00" itemprop="dateModified" datetime="2018-05-22T11:54:37+08:00">May 22, 2018</time>
+                <time title="Modified: May 22, 2018 11:54:37" itemprop="dateModified" datetime="2018-05-22T11:54:37+08:00">May 22, 2018</time>
               
             
           </span>
@@ -421,6 +423,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/10/2018-2-10-使用Dobbo的注意事项/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/10/2018-2-10-使用Dobbo的注意事项/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -502,6 +514,15 @@
     
 
     
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
 
     
 
@@ -511,7 +532,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Dobbo/" rel="tag"># Dobbo</a>
+            <a href="/tags/Dobbo/" rel="tag"><i class="fa fa-tag"></i> Dobbo</a>
           
         </div>
       
@@ -563,6 +584,15 @@
           
 
   
+  <div id="gitment-container"></div>
+    <div class="comments" id="comments">
+      
+
+      
+    </div>
+
+  
+
 
 
 
@@ -706,6 +736,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -943,6 +980,43 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: '',
+            repo: '',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ba6397533fcd44e2611758a9a8d839e088b10e30',
+            
+                client_id: 'b883170a11304576d86d'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 
