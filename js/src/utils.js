@@ -13,9 +13,9 @@ NexT.utils = NexT.$u = {
         var imageTitle = $image.attr('title');
         var $imageWrapLink = $image.parent('a');
 
-        if ($imageWrapLink.length < 1) {
-	        var imageLink = ($image.attr('data-original')) ? this.getAttribute('data-original') : this.getAttribute('src');
-          $imageWrapLink = $image.wrap('<a data-fancybox="group" href="' + imageLink + '"></a>').parent('a');
+        if ($imageWrapLink.size() < 1) {
+          var imageLink = ($image.attr('data-original')) ? this.getAttribute('data-original') : this.getAttribute('src');
+          $imageWrapLink = $image.wrap('<a href="' + imageLink + '"></a>').parent('a');
         }
 
         $imageWrapLink.addClass('fancybox fancybox.image');
@@ -172,7 +172,7 @@ NexT.utils = NexT.$u = {
         if (this.src.search('music.163.com') > 0) {
           newDimension = getDimension($iframe);
           var shouldRecalculateAspect = newDimension.width > oldDimension.width ||
-                                        newDimension.height < oldDimension.height;
+            newDimension.height < oldDimension.height;
 
           // 163 Music Player has a fixed height, so we need to reset the aspect radio
           if (shouldRecalculateAspect) {
@@ -192,6 +192,16 @@ NexT.utils = NexT.$u = {
     function getAspectRadio(width, height) {
       return height / width * 100;
     }
+  },
+
+  /**
+   * Add `menu-item-active` class name to menu item
+   * via comparing location.path with menu item's href.
+   */
+  addActiveClassToMenuItem: function () {
+    var path = window.location.pathname;
+    path = path === '/' ? path : path.substring(0, path.length - 1);
+    $('.menu-item a[href^="' + path + '"]:first').parent().addClass('menu-item-active');
   },
 
   hasMobileUA: function () {
@@ -255,8 +265,8 @@ NexT.utils = NexT.$u = {
 
   getContentVisibilityHeight: function () {
     var docHeight = $('#content').height(),
-        winHeight = $(window).height(),
-        contentVisibilityHeight = (docHeight > winHeight) ? (docHeight - winHeight) : ($(document).height() - winHeight);
+      winHeight = $(window).height(),
+      contentVisibilityHeight = (docHeight > winHeight) ? (docHeight - winHeight) : ($(document).height() - winHeight);
     return contentVisibilityHeight;
   },
 
@@ -269,11 +279,11 @@ NexT.utils = NexT.$u = {
 
   getSidebarSchemePadding: function () {
     var sidebarNavHeight = ($('.sidebar-nav').css('display') == 'block') ? $('.sidebar-nav').outerHeight(true) : 0,
-        sidebarInner = $('.sidebar-inner'),
-        sidebarPadding = sidebarInner.innerWidth() - sidebarInner.width(),
-        sidebarSchemePadding = this.isPisces() || this.isGemini() ?
-          ((sidebarPadding * 2) + sidebarNavHeight + (CONFIG.sidebar.offset * 2) + this.getSidebarb2tHeight()) :
-          ((sidebarPadding * 2) + (sidebarNavHeight / 2));
+      sidebarInner = $('.sidebar-inner'),
+      sidebarPadding = sidebarInner.innerWidth() - sidebarInner.width(),
+      sidebarSchemePadding = this.isPisces() || this.isGemini() ?
+        ((sidebarPadding * 2) + sidebarNavHeight + (CONFIG.sidebar.offset * 2) + this.getSidebarb2tHeight()) :
+        ((sidebarPadding * 2) + (sidebarNavHeight / 2));
     return sidebarSchemePadding;
   }
 
@@ -310,12 +320,12 @@ $(document).ready(function () {
 
     // Initialize Sidebar & TOC Width.
     var scrollbarWidth = NexT.utils.getScrollbarWidth();
-      if ($('.site-overview-wrap').height() > (document.body.clientHeight - NexT.utils.getSidebarSchemePadding())) {
-        $('.site-overview').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
-      }
-      if ($('.post-toc-wrap').height() > (document.body.clientHeight - NexT.utils.getSidebarSchemePadding())) {
-        $('.post-toc').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
-      }
+    if ($('.site-overview-wrap').height() > (document.body.clientHeight - NexT.utils.getSidebarSchemePadding())) {
+      $('.site-overview').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
+    }
+    if ($('.post-toc-wrap').height() > (document.body.clientHeight - NexT.utils.getSidebarSchemePadding())) {
+      $('.post-toc').css('width', 'calc(100% + ' + scrollbarWidth + 'px)');
+    }
 
     // Initialize Sidebar & TOC Height.
     updateSidebarHeight(document.body.clientHeight - NexT.utils.getSidebarSchemePadding());
