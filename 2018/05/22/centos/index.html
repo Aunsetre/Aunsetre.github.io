@@ -701,7 +701,41 @@ destination-unreachable echo-reply echo-request parameter-problem redirect route
         <div id="gitment-container"></div>
       
     </div>
+    <script>
+    const myTheme = {
+      render(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        container.className = 'gitment-container gitment-root-container'
 
+         // your custom component
+        container.appendChild(instance.renderSomething(state, instance))
+
+        container.appendChild(instance.renderHeader(state, instance))
+        container.appendChild(instance.renderEditor(state, instance))
+        container.appendChild(instance.renderComments(state, instance))
+        container.appendChild(instance.renderFooter(state, instance))
+        return container
+      },
+      renderSomething(state, instance) {
+        const container = document.createElement('div')
+        container.lang = "en-US"
+        if (state.user.login) {
+          container.innerText = `Hello, ${state.user.login}`
+        }
+        return container
+      }
+    }
+
+    const gitment = new Gitment({
+      // ...
+      theme: myTheme,
+    })
+
+    gitment.render(document.body)
+    // or
+    // gitment.renderSomthing(document.body)
+</script>
   
 
 
@@ -1129,23 +1163,7 @@ destination-unreachable echo-reply echo-request parameter-problem redirect route
             }});
         gitment.render('gitment-container');
       }
-const myTheme = {
-  render(state, instance) {
-    const container = document.createElement('div')
-    container.lang = "en-US"
-    container.className = 'gitment-container gitment-root-container'
-    container.appendChild(instance.renderHeader(state, instance))
-    container.appendChild(instance.renderEditor(state, instance))
-    container.appendChild(instance.renderComments(state, instance))
-    container.appendChild(instance.renderFooter(state, instance))
-    return container
-  },
-}
-const gitment = new Gitment({
-  // ...
-  theme: myTheme,
-})
-gitment.render('container')
+
       
       renderGitment();
       
