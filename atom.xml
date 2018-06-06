@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aunsetre.top/"/>
-  <updated>2018-05-23T04:26:55.819Z</updated>
+  <updated>2018-06-06T06:39:41.563Z</updated>
   <id>https://aunsetre.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis笔记（一）</title>
+    <link href="https://aunsetre.top/2018/06/06/Redis%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://aunsetre.top/2018/06/06/Redis笔记（一）/</id>
+    <published>2018-06-06T06:37:33.308Z</published>
+    <updated>2018-06-06T06:39:41.563Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>启动Redis服务器</strong></p><p><code>$ src/redis-server</code></p><p><img src="https://static.aunsetre.top/hexo/img/2018/06/1528262244802.png" alt="1528262244802"></p><p>默认并不是在后台启动，如果你想在后台启动则需要开启守护进程<a id="more"></a></p><p>修改Redis.conf中的daemonize 设置为yes(默认是no)</p><p>再重新启动,依据配置文件启动服务器</p><p><code>src/redis-server url/redis.conf</code></p><h2 id="关闭进程"><a href="#关闭进程" class="headerlink" title="关闭进程"></a>关闭进程</h2><p><strong>查看Redis进程，拿到pid</strong></p><p><code>ps -ef |grep redis</code></p><p><strong>关闭进程</strong></p><p><code>kill pid</code></p><p><strong>对于结束不掉的进程可以使用：</strong></p><p><code>kill -s 9 pid</code></p><h3 id="Redis-键命令"><a href="#Redis-键命令" class="headerlink" title="Redis 键命令"></a>Redis 键命令</h3><p><strong>设置键值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET name redis</span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p><p><strong>根据键取值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get name</span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure></p><p><strong>修改Key的名称</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># RENAME key newkey</span><br></pre></td></tr></table></figure><p><strong>删除Key</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; DEL runoobkey</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure><p><strong>检查Key是否存在，存在返回1，不存在返回0</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXISTS key</span><br></pre></td></tr></table></figure><p><strong>为给定 key 设置过期时间</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPIRE key seconds</span><br></pre></td></tr></table></figure><p><strong>EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是  时间戳</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPIREAT key timestamp</span><br></pre></td></tr></table></figure></p><p><strong>设置 key 的过期时间以毫秒计。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PEXPIRE key milliseconds</span><br></pre></td></tr></table></figure><p><strong>移除Key的过期时间</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PERSIST key</span><br></pre></td></tr></table></figure><p><strong>TYPE key 返回 key 所储存的值的类型 </strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TYPE key</span><br></pre></td></tr></table></figure><p> <strong>随机返回一个Key</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RANDOMKEY</span><br></pre></td></tr></table></figure><p><strong>根据给定pattern筛选key </strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEYS pattern</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;启动Redis服务器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$ src/redis-server&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://static.aunsetre.top/hexo/img/2018/06/1528262244802.png&quot; alt=&quot;1528262244802&quot;&gt;&lt;/p&gt;
+&lt;p&gt;默认并不是在后台启动，如果你想在后台启动则需要开启守护进程
+    
+    </summary>
+    
+      <category term="Redis" scheme="https://aunsetre.top/categories/Redis/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>短链生成算法</title>
@@ -45,7 +68,7 @@
     <link href="https://aunsetre.top/2018/05/15/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/"/>
     <id>https://aunsetre.top/2018/05/15/线程安全问题分析/</id>
     <published>2018-05-14T16:00:00.000Z</published>
-    <updated>2018-05-29T05:04:21.858Z</updated>
+    <updated>2018-05-29T05:10:26.322Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是线程安全问题？"><a href="#什么是线程安全问题？" class="headerlink" title="什么是线程安全问题？"></a>什么是线程安全问题？</h2><p>从某个线程开始访问到访问结束的整个过程，如果有一个访问对象被其他线程修改，那么对于当前线程而言就发生了线程安全问题；如果在整个访问过程中，无一对象被其他线程修改，就是线程安全的。</p><h2 id="线程安全问题产生的根本原因"><a href="#线程安全问题产生的根本原因" class="headerlink" title="线程安全问题产生的根本原因"></a>线程安全问题产生的根本原因</h2><ol><li>首先是多线程环境，即同时存在有多个操作者，单线程环境不存在线程安全问题。在单线程环境下，任何操作包括修改操作都是操作者自己发出的，操作者发出操作时不仅有明确的目的，而且意识到操作的影响。</li><li>多个操作者（线程）必须操作同一个对象，只有多个操作者同时操作一个对象，行为的影响才能立即传递到其他操作者。</li><li>多个操作者（线程）对同一对象的操作必须包含修改操作，共同读取不存在线程安全问题，因为对象不被修改，未发生变化，不能产生影响。</li></ol><p>综上可知，线程安全问题产生的根本原因是共享数据存在被并发修改的可能，即一个线程读取时，允许另一个线程修改。<a id="more"></a></p><h2 id="线程安全问题解决思路"><a href="#线程安全问题解决思路" class="headerlink" title="线程安全问题解决思路"></a>线程安全问题解决思路</h2><p>根据线程安全问题产生的条件，解决线程安全问题的思路是消除产生线程安全问题的环境：</p><ol><li>消除共享数据：成员变量与静态变量多线程共享，将这些全局变量转化为局部变量，局部变量存放在栈，线程间不共享，就不存在线程安全问题产生的环境了。消除共享数据的不足：如果需要一个对象采集各个线程的信息，或者在线程间传递信息，消除了共享对象就无法实现此目的。</li><li>使用线程同步机制：给读写操作同时加锁，使得同时只有一个线程可以访问共享数据。如果单单给写操作加锁，同时只有一个线程可以执行写操作，而读操作不受限制，允许多线程并发读取，这时就可能出现不可重复读的情况，如一个持续时间比较长的读线程，相隔较长时间读取数组同一索引位置的数据，正好在这两次读取的时间内，一个线程修改了该索引处的数据，造成该线程从同一索引处前后读取的数据不一致。是同时给读写加锁，还是只给写加锁，根据具体需求而定。同步机制的缺点是降低了程序的吞吐量。</li><li>建立副本：使用ThreadLocal为每一个线程建立一个变量的副本，各个线程间独立操作，互不影响。该方式本质上是消除共享数据思想的一种实现。</li></ol>]]></content>
     
@@ -499,30 +522,6 @@
     
     
       <category term="VersionContro" scheme="https://aunsetre.top/tags/VersionContro/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Git推送仓库到Github</title>
-    <link href="https://aunsetre.top/2017/04/05/%E9%80%9A%E8%BF%87git%E5%91%BD%E4%BB%A4%E8%A1%8C%E3%80%82/"/>
-    <id>https://aunsetre.top/2017/04/05/通过git命令行。/</id>
-    <published>2017-04-04T16:00:00.000Z</published>
-    <updated>2018-05-22T05:43:12.362Z</updated>
-    
-    <content type="html"><![CDATA[<p>刚开始试着想将自己的代码上传至github上的时候真的是个小白，Google上面到处搜到处找资源。后来云里雾里的成功上传后，发现网络上介绍的大致有两种方法，一种方法是通过git命令行，另一种方法是通过下载Github客户端或第三方工具，很多IDE也集成了git的大部分功能。<br><a id="more"></a></p><h2 id="通过git命令行"><a href="#通过git命令行" class="headerlink" title="通过git命令行"></a>通过git命令行</h2><ul><li>ssh-keygen -t rsa -C “<a href="mailto:aunsetre@gmail.com" target="_blank" rel="noopener">aunsetre@gmail.com</a>“ //123 创建SSH Key</li><li>再去用户主目录里找到.ssh文件夹，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露，id_rsa.pub是公钥，可以公开。</li><li><p><img src="https://static.aunsetre.top/hexo/img/20180522083912.png" alt="github"></p></li><li><p>去创建仓库</p></li></ul><p><img src="https://static.aunsetre.top/hexo/img/1526882998944.png" alt="Github"><br>将仓库路径复制下来</p><p><img src="C:\Users\Aunse\AppData\Local\Temp\1526914794578.png" alt="1526914794578"></p><blockquote><p>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:flora0103/projects.git    //关联一个远程库命令，<br><a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:flora0103/projects.git   这个是自己远程库<br>git push -u origin master    //关联后,第一次推送master分支的所有内容命令，此后，每次本地提交后，就可以使用命令git push origin master推送最新修改</p></blockquote><ul><li>初始化一个本地文件夹作为仓库<blockquote><p>git init 仓库文件夹名称<br>如我的就在命令行中输入:<br>git projects</p></blockquote></li></ul><p>首先要将你想上传的代码文件夹拖至这个新出现的仓库文件夹，然后在命令行输入:</p><blockquote><p>cd 仓库文件夹名称</p></blockquote><p>如我的就在命令行中输入:</p><blockquote><p>cd projects</p></blockquote><p>这时你命令行中的目录就会出现在你的仓库目录下。</p><p>接下来输入:</p><p>git add 你想上传的代码文件夹名称`</p><p>或者是输入:</p><blockquote><p>git add .</p></blockquote><p>(add后面的‘.’代表你仓库中的所有内容)</p><p>然后输入:</p><blockquote><p>git commit -m “你想交代的内容”</p></blockquote><p>最后输入:</p><blockquote><p>git push origin master</p></blockquote><p>一会儿后你就会在你github的仓库中看到你上传的代码文件夹啦。是不是都很简单呢！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;刚开始试着想将自己的代码上传至github上的时候真的是个小白，Google上面到处搜到处找资源。后来云里雾里的成功上传后，发现网络上介绍的大致有两种方法，一种方法是通过git命令行，另一种方法是通过下载Github客户端或第三方工具，很多IDE也集成了git的大部分功能。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="https://aunsetre.top/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="https://aunsetre.top/tags/Git/"/>
-    
-      <category term="Github" scheme="https://aunsetre.top/tags/Github/"/>
     
   </entry>
   
