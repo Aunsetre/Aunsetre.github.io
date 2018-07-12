@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="Aunsetre&#39;s Blog">
 <meta property="og:description" content="花了大半天时间，解决了springMVC项目增加spring-session共享session报了异常 java.lang.ClassNotFoundException:com.lambdaworks.  花了大半天时间，解决了springMVC项目增加spring-session共享session报了异常">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-25T13:49:03.723Z">
+<meta property="og:updated_time" content="2018-07-02T13:22:47.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Session整合">
 <meta name="twitter:description" content="花了大半天时间，解决了springMVC项目增加spring-session共享session报了异常 java.lang.ClassNotFoundException:com.lambdaworks.  花了大半天时间，解决了springMVC项目增加spring-session共享session报了异常">
@@ -401,7 +401,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: May 25, 2018 21:49:03" itemprop="dateModified" datetime="2018-05-25T21:49:03+08:00">May 25, 2018</time>
+                <time title="Modified: July 02, 2018 21:22:47" itemprop="dateModified" datetime="2018-07-02T21:22:47+08:00">July 02, 2018</time>
               
             
           </span>
@@ -496,7 +496,7 @@
 <p>花了大半天时间，解决了springMVC项目增加spring-session共享session报了异常<a id="more"></a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassNotFoundException:com.lambdaworks.redis.AbstractRedisClient</span><br><span class="line">java.lang.ClassNotFoundException:com.lambdaworks.redis.RedisException</span><br></pre></td></tr></table></figure>
 <h1 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h1><p>项目做了前后端分离，springMVC项目部署在三台tomcat上，前端部署在另三台tomcat上，然后HA做了分发处理，使一个用户访问后，后面的访问都会是其中的某一台tomcat… 理想是美好的，现实中，会出现登录前后会有连接是访问了不同的tomcat，我没有运维权限，也不想接这个坑，所以就从代码上处理吧。<br>代码上怎么处理呢，我觉得很简单，session共享不就行了，使用spring-session超简单，几行代码就搞定了。注意：这里的超简单是在spring-boot中使用才超简单。spring-boot中使用redis共享session配置：<br>1、pom.xml加依赖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.session&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-session&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.session&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-session-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.session<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-session<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.session<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-session-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>2、application.properties加配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.session.store-type=redis</span><br></pre></td></tr></table></figure>
 <p>搞定<br>但是，我的项目不是spring-boot项目，所以参考官网说的配吧。我的部署环境jdk是1.7、tomcat7，所以sprint-session 2.0.x是肯定不能支持了，所以还是使用1.3.3吧，<a href="https://docs.spring.io/spring-session/docs/1.3.3.RELEASE/reference/html5/?spm=a2c4e.11153940.blogcont596244.14.77454125iH9GOf#httpsession-how" target="_blank" rel="noopener">官网手册</a><br>很简单，有web.xml，所以配置分2步：<br>1、 在spring-context.xml中加上配置：</p>
